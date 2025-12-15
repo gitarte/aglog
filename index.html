@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>aglog - Cabrillo Logger</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>aglog - Cabrillo Logger</h1>
+            <div id="utc-clock" class="utc-clock"></div>
+        </header>
+
+        <main>
+            <!-- Contest Settings -->
+            <section class="contest-settings">
+                <h2>Ustawienia zawodów</h2>
+                <button id="toggle-settings" class="btn btn-secondary">Pokaż/Ukryj ustawienia</button>
+                <form id="settings-form" style="display: none;">
+                    <div class="form-row">
+                        <div class="form-group full">
+                            <label for="contest-name">Nazwa zawodów *</label>
+                            <input type="text" id="contest-name" required>
+                        </div>
+
+                        <div class="form-group extra-wide">
+                            <label for="category">Kategoria *</label>
+                            <input type="text" id="category" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group extra-wide">
+                            <label for="station-callsign">Znak używany w zawodach *</label>
+                            <input type="text" id="station-callsign" required>
+                        </div>
+                        
+                        <div class="form-group extra-wide">
+                            <label for="operators">Operatorzy</label>
+                            <input type="text" id="operators">
+                        </div>
+
+                        <div class="form-group extra-wide">
+                            <label for="club">Klub</label>
+                            <input type="text" id="club">
+                        </div>
+
+                        <div class="form-group extra-wide">
+                            <label for="email">Email</label>
+                            <input type="email" id="email">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group extra-wide">
+                            <label for="locator">Locator *</label>
+                            <input type="text" id="locator" required>
+                        </div>
+                        
+                        <div class="form-group extra-wide">
+                            <label for="province">Skrót wojew./powiatu</label>
+                            <input type="text" id="province">
+                        </div>
+                        
+                        <div class="form-group extra-wide">
+                            <label for="claimed-score">Wynik zgłoszony</label>
+                            <input type="number" id="claimed-score" min="0">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group full">
+                            <label for="name">Imię i nazwisko *</label>
+                            <input type="text" id="name" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group full">
+                            <label for="address-1">Adres (ulica, nr_domu/nr_mieszkania) *</label>
+                            <input type="text" id="address-1" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group full">
+                            <label for="address-2">Adres (kod pocztowy, miejscowość) *</label>
+                            <input type="text" id="address-2" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group full">
+                            <label for="address-3">Adres (województwo, kraj) *</label>
+                            <input type="text" id="address-3" required>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" id="save-settings-btn" class="btn btn-primary">Zapisz ustawienia</button>
+                        <button id="clear-settings-btn" class="btn btn-danger">Wyczyść ustawienia zawodów</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- QSO Entry Form -->
+            <section class="entry-form">
+                <h2>Log QSO</h2>
+                <form id="qso-form">
+                    <input type="hidden" id="edit-id" value="">
+                    
+                    <div class="form-row">
+                        <div class="form-group medium">
+                            <label for="frequency">Frequency (MHz)</label>
+                            <input type="text" id="frequency" required>
+                        </div>
+                        
+                        <div class="form-group medium">
+                            <label for="mode">Mode</label>
+                            <select id="mode" required>
+                                <option value="">Select Mode</option>
+                                <option value="PH">SSB</option>
+                                <option value="CW">CW</option>
+                                <option value="RTTY">RTTY</option>
+                                <option value="FT8">FT8</option>
+                                <option value="FT4">FT4</option>
+                                <option value="PSK">PSK</option>
+                                <option value="FM">FM</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group medium">
+                            <label for="callsign">Callsign</label>
+                            <input type="text" id="callsign" required autocomplete="off">
+                        </div>
+                        
+                        <div class="form-group medium">
+                            <label for="rst-received">RST Received</label>
+                            <input type="text" id="rst-received" required maxlength="3" value="59">
+                        </div>
+
+                        <div class="form-group medium">
+                            <label for="group-received">Group Received</label>
+                            <input type="text" id="group-received" required>
+                        </div>
+
+                    </div>  
+
+                    <div class="form-row">
+                        <div class="form-group medium">
+                            <label for="noop"></label>
+                            <input type="hidden" id="noop">
+                        </div>
+
+                        <div class="form-group medium">
+                            <label for="rst-sent">RST Sent</label>
+                            <input type="text" id="rst-sent" required maxlength="3" value="59">
+                        </div>
+                        
+                        <div class="form-group medium">
+                            <label for="group-sent">Group Sent</label>
+                            <input type="text" id="group-sent" required>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" id="submit-btn" class="btn btn-primary">Add QSO</button>
+                        <button type="button" id="cancel-btn" class="btn btn-secondary" style="display: none;">Cancel Edit</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Log Actions -->
+            <section class="log-actions">
+                <button id="save-btn" class="btn btn-success">Save Cabrillo (.cbr)</button>
+                <button id="clear-btn" class="btn btn-danger">Clear All Entries</button>
+                <span id="entry-count" class="entry-count">0 QSOs logged</span>
+            </section>
+
+            <!-- QSO Log Display -->
+            <section class="log-display">
+                <h2>QSO Log</h2>
+                <div id="log-container">
+                    <table class="qso-table">
+                        <thead>
+                            <tr>
+                                <th>FREQUENCY</th>
+                                <th>MODE</th>
+                                <th>DATE</th>
+                                <th>TIME</th>
+                                <th>MY CALL</th>
+                                <th>MY RST</th>
+                                <th>MY GROUP</th>
+                                <th>SENT CALL</th>
+                                <th>SENT RST</th>
+                                <th>SENT GROUP</th>
+                            </tr>
+                        </thead>
+                        <tbody id="log-body">
+
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>aglog - Vanilla JavaScript Cabrillo Logger | MIT License</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
